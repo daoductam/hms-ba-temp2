@@ -52,6 +52,16 @@ public class UserAPI {
         } catch (AuthenticationException e) {
             throw new HmsException(ErrorCode.INVALID_CREDENTIALS);
         }
+        UserDTO userDTO = new UserDTO();
+        userDTO.setEmail(loginDTO.getEmail());
+        userDTO.setPassword(loginDTO.getPassword());
+
+        // 2. Gọi hàm loginUser trong Service
+        // Hàm này sẽ thực hiện:
+        // - Kiểm tra email tồn tại
+        // - Kiểm tra mật khẩu (passwordEncoder.matches)
+        // - Kiểm tra trạng thái (PENDING, LOCKED...) -> Ném lỗi nếu vi phạm
+        userService.loginUser(userDTO);
         final UserDetails userDetails = userDetailsService.loadUserByUsername(loginDTO.getEmail());
         final  String jwt = jwtUtil.generateToken(userDetails);
         return new ResponseEntity<>(jwt, HttpStatus.OK);

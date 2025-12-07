@@ -60,16 +60,15 @@ public class UserServiceImpl implements UserService{
         if (!passwordEncoder.matches(userDTO.getPassword(), user.getPassword())) {
             throw new HmsException(ErrorCode.INVALID_CREDENTIALS);
         }
+        System.out.println("status "+user.getStatus());
         log.info("status: {}", user.getStatus());
-        if (user.getStatus() == UserStatus.PENDING) {
-            log.info("loi: {}", user.getStatus());
-
-            // Bạn cần thêm ErrorCode.ACCOUNT_PENDING_APPROVAL vào Enum ErrorCode nhé
+        if (UserStatus.PENDING.equals(user.getStatus())) {
+            // Lưu ý: Bạn cần chắc chắn đã thêm ACCOUNT_PENDING_APPROVAL vào Enum ErrorCode
+            // Nếu chưa có, tạm thời dùng throw new HmsException("Account is pending approval");
             throw new HmsException(ErrorCode.ACCOUNT_PENDING_APPROVAL);
         }
-        if (user.getStatus() == UserStatus.LOCKED || user.getStatus() == UserStatus.REJECTED) {
-            log.info("õoi: {}", user.getStatus());
 
+        if (UserStatus.LOCKED.equals(user.getStatus()) || UserStatus.REJECTED.equals(user.getStatus())) {
             throw new HmsException(ErrorCode.ACCOUNT_LOCKED);
         }
         user.setPassword(null);
@@ -96,6 +95,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public Long getProfile(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new HmsException(ErrorCode.USER_NOT_FOUND));
+        System.out.println("Checking profile for user: " + user.getEmail() + " | Role: " + user.getRole());
         if (user.getRole().equals(Roles.DOCTOR)) {
             return profileClient.getDoctor(user.getProfileId());
         } else if (user.getRole().equals(Roles.PATIENT)) {
