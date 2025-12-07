@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService{
         if (UserStatus.LOCKED.equals(user.getStatus()) || UserStatus.REJECTED.equals(user.getStatus())) {
             throw new HmsException(ErrorCode.ACCOUNT_LOCKED);
         }
-        user.setPassword(null);
+//        user.setPassword(null);
         return user.toDTO();
     }
 

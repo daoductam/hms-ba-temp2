@@ -1,6 +1,7 @@
 package com.hms.user.UserMS.config;
 
 import com.hms.user.UserMS.dto.Roles;
+import com.hms.user.UserMS.dto.UserStatus;
 import com.hms.user.UserMS.entity.User;
 import com.hms.user.UserMS.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class DataInitializer implements CommandLineRunner {
                     .email("admin@gmail.com")
                     .password(passwordEncoder.encode("admin123")) // Mật khẩu là admin123
                     .role(Roles.ADMIN)
+                    .status(UserStatus.ACTIVE)
                     .createdAt(LocalDateTime.now())
                     .updatedAt(LocalDateTime.now())
                     .build();
