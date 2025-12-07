@@ -2,6 +2,8 @@ package com.hms.user.UserMS.repository;
 
 import com.hms.user.UserMS.dto.MonthlyRoleCountDTO;
 import com.hms.user.UserMS.dto.Roles;
+import com.hms.user.UserMS.dto.UserDTO;
+import com.hms.user.UserMS.dto.UserStatus;
 import com.hms.user.UserMS.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +22,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "GROUP BY FUNCTION('MONTH', a.createdAt), CAST(FUNCTION('MONTHNAME', a.createdAt) AS string) " +
             "ORDER BY FUNCTION('MONTH', a.createdAt)")
     List<MonthlyRoleCountDTO> countRegistrationsByRoleGroupedByMonth(Roles role);
-
+    List<User> findByRoleAndStatus(Roles role, UserStatus status);
 
 }

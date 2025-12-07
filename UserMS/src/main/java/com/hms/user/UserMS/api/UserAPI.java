@@ -1,10 +1,7 @@
 package com.hms.user.UserMS.api;
 
 import com.hms.user.UserMS.clients.Profile;
-import com.hms.user.UserMS.dto.LoginDTO;
-import com.hms.user.UserMS.dto.RegistrationCountsDTO;
-import com.hms.user.UserMS.dto.ResponseDTO;
-import com.hms.user.UserMS.dto.UserDTO;
+import com.hms.user.UserMS.dto.*;
 import com.hms.user.UserMS.exception.ErrorCode;
 import com.hms.user.UserMS.exception.HmsException;
 import com.hms.user.UserMS.jwt.JwtUtil;
@@ -14,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -21,6 +19,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -66,5 +66,23 @@ public class UserAPI {
     @GetMapping("/getRegistrationCounts")
     public ResponseEntity<RegistrationCountsDTO> getMonthlyRegistrationCounts() {
         return new ResponseEntity<>(userService.getMonthlyRegistrationCounts(), HttpStatus.OK);
+    }
+
+    @PutMapping("/admin/approve/{id}")
+     @PreAuthorize("hasRole('ADMIN')") // Nhớ thêm bảo mật
+    public ResponseEntity<String> approveDoctor(@PathVariable Long id) {
+        userService.updateUserStatus(id, UserStatus.ACTIVE);
+        return new ResponseEntity<>("Doctor approved successfully", HttpStatus.OK);
+    }
+
+    @PutMapping("/admin/reject/{id}")
+    public ResponseEntity<String> rejectDoctor(@PathVariable Long id) {
+        userService.updateUserStatus(id, UserStatus.REJECTED);
+        return new ResponseEntity<>("Doctor rejected", HttpStatus.OK);
+    }
+
+    @GetMapping("/getPendingDoctors")
+    public ResponseEntity<List<UserDTO>> getPendingDoctors() {
+        return new ResponseEntity<>(userService.getPendingDoctors(), HttpStatus.OK);
     }
 }

@@ -2,6 +2,7 @@ package com.hms.user.UserMS.entity;
 
 import com.hms.user.UserMS.dto.Roles;
 import com.hms.user.UserMS.dto.UserDTO;
+import com.hms.user.UserMS.dto.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -33,6 +34,10 @@ public class User {
 //    @Column(nullable = false)
     LocalDateTime updatedAt;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    UserStatus status;
+
     public UserDTO toDTO() {
         return UserDTO.builder()
                 .id(this.id)
@@ -43,6 +48,7 @@ public class User {
                 .profileId(this.profileId)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
+                .status(status)
                 .build();
     }
 

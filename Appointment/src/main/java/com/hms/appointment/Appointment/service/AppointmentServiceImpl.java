@@ -59,7 +59,7 @@ public class AppointmentServiceImpl implements AppointmentService{
                     .build();
 
             // Gửi message vào topic "notification-appointment"
-            kafkaTemplate.send("notification-appointment", event);
+//            kafkaTemplate.send("notification-appointment", event);
 
         } catch (Exception e) {
             // Log error nhưng KHÔNG throw exception để rollback transaction đặt lịch

@@ -33,6 +33,7 @@ public class UserDTO {
     Long profileId;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
+    UserStatus status;
     public User toEntity() {
         return User.builder()
                 .id(this.id)
@@ -43,6 +44,7 @@ public class UserDTO {
                 .profileId(this.profileId)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
+                .status(status)
                 .build();
     }
 }
