@@ -13,7 +13,17 @@
         <module name="hms-common" />
         <module name="demo" />
       </profile>
-      <profile name="Annotation profile for media" enabled="true">
+      <profile name="Annotation profile for PaymentMS" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
+        </processorPath>
+        <module name="PaymentMS" />
+        <module name="NotificationMS" />
+      </profile>
+      <profile name="Annotation profile for PharmacyMS" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -24,16 +34,6 @@
         <module name="media" />
         <module name="ProfileMS" />
         <module name="PharmacyMS" />
-      </profile>
-      <profile name="Annotation profile for PaymentMS" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
-        </processorPath>
-        <module name="PaymentMS" />
-        <module name="NotificationMS" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
