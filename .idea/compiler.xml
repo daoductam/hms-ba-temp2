@@ -34,11 +34,11 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
         <module name="PaymentMS" />
-        <module name="chat-app" />
         <module name="NotificationMS" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="chat-app" target="21" />
       <module name="ChatMS" target="21" />
       <module name="HMS" target="21" />
       <module name="payment-ms" target="21" />
