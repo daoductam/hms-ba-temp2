@@ -21,7 +21,6 @@
     </option>
     <option name="ignoredFiles">
       <set>
-        <option value="$PROJECT_DIR$/ChatMS/pom.xml" />
         <option value="$PROJECT_DIR$/HMS/pom.xml" />
       </set>
     </option>

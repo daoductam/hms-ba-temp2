@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.1
+    container_name: chat-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: hTgsMNHkOjRhSVycoMYhRCtPIUbRaobe
+      MYSQL_DATABASE: chat_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  boot-app:
+    image: daoductam174/chatback:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://root:hTgsMNHkOjRhSVycoMYhRCtPIUbRaobe@hopper.proxy.rlwy.net:14238/railwayjdbc:mysql://root:hTgsMNHkOjRhSVycoMYhRCtPIUbRaobe@hopper.proxy.rlwy.net:14238/railway
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: hTgsMNHkOjRhSVycoMYhRCtPIUbRaobe
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
