@@ -13,16 +13,6 @@
         <module name="hms-common" />
         <module name="demo" />
       </profile>
-      <profile name="Annotation profile for PaymentMS" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
-        </processorPath>
-        <module name="PaymentMS" />
-        <module name="NotificationMS" />
-      </profile>
       <profile name="Annotation profile for PharmacyMS" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -35,8 +25,20 @@
         <module name="ProfileMS" />
         <module name="PharmacyMS" />
       </profile>
+      <profile name="Annotation profile for chat-app" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+        </processorPath>
+        <module name="PaymentMS" />
+        <module name="chat-app" />
+        <module name="NotificationMS" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ChatMS" target="21" />
       <module name="HMS" target="21" />
       <module name="payment-ms" target="21" />
       <module name="pharmacy" target="21" />
@@ -45,6 +47,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Appointment" options="-parameters" />
+      <module name="ChatMS" options="-parameters" />
       <module name="Eureaka-Server" options="-parameters" />
       <module name="GatewayMS" options="-parameters" />
       <module name="HMS" options="-parameters" />
@@ -53,6 +56,7 @@
       <module name="PharmacyMS" options="-parameters" />
       <module name="ProfileMS" options="-parameters" />
       <module name="UserMS" options="-parameters" />
+      <module name="chat-app" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="hms-common" options="-parameters" />
       <module name="media" options="-parameters" />

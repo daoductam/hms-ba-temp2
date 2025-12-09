@@ -16,6 +16,7 @@
         <option value="$PROJECT_DIR$/NotificationMS/pom.xml" />
         <option value="$PROJECT_DIR$/hms-common/pom.xml" />
         <option value="$PROJECT_DIR$/PaymentMS/pom.xml" />
+        <option value="$PROJECT_DIR$/ChatMS/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
